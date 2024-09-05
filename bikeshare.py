@@ -184,6 +184,29 @@ def user_stats(df):
     print('-'*40)
 
 
+def display_data(df):
+    """
+    Displays 5 rows of data at a time based on user input.
+    
+    Args:
+        df - Pandas DataFrame to display
+    """
+    start_loc = 0  # Initial start location for displaying data
+    
+    while True:
+        # Display the next 5 rows of data
+        print(df.iloc[start_loc:start_loc + 5])
+        
+        # Update the start location for the next set of rows
+        start_loc += 5
+        
+        # Ask the user if they want to see more data
+        view_more = input('Do you want to see the next 5 rows of data? (yes or no): ').lower()
+        
+        if view_more != 'yes':
+            break
+
+
 def main():
     while True:
         city, month, day = get_filters()
@@ -193,6 +216,7 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
+        display_data(df)
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
